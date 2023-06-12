@@ -1,16 +1,6 @@
-import { tasks as data } from "../../shared/tasks";
+import propTypes from "prop-types";
 
-import { useState, useEffect } from "react";
-
-console.log(data);
-
-export default function TaskList() {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    setTasks(data);
-  }, []);
-
+export default function TaskList({ tasks }) {
   if (tasks.length === 0) {
     return <h1>no tasks yet</h1>;
   }
@@ -26,3 +16,13 @@ export default function TaskList() {
     </>
   );
 }
+
+TaskList.propTypes = {
+  tasks: propTypes.arrayOf(
+    propTypes.shape({
+      id: propTypes.number.isRequired,
+      title: propTypes.string.isRequired,
+      description: propTypes.string.isRequired,
+    })
+  ).isRequired,
+};
