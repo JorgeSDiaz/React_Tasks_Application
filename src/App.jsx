@@ -1,6 +1,6 @@
 import TaskList from "./components/taskList/TaskList";
 import TaskForm from "./components/taskForm/TaskForm";
-import { tasks as data } from "./shared/tasks";
+import { tasks as data } from "./data/tasks";
 
 import { useState, useEffect } from "react";
 
@@ -11,11 +11,11 @@ export default function App() {
     setTasks(data);
   }, []);
 
-  const createTask = (taskTitle) => {
+  const createTask = (task) => {
     setTasks([...tasks, {
       id: tasks.length + 1,
-      title: taskTitle,
-      description: taskTitle + " " + (tasks.length + 1) + " task description",
+      title: task.title,
+      description: task.description,
     }]);
   };
 

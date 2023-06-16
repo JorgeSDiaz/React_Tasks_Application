@@ -1,4 +1,5 @@
 import propTypes from "prop-types";
+import TaskCard from "../taskCard/TaskCard";
 
 export default function TaskList({ tasks }) {
   if (tasks.length === 0) {
@@ -8,21 +9,16 @@ export default function TaskList({ tasks }) {
   return (
     <>
       {tasks.map((task) => (
-        <div key={task.id}>
-          <h1>{task.title}</h1>
-          <p>{task.description}</p>
-        </div>
+        <TaskCard key={task.id} task={task} />
       ))}
     </>
   );
 }
 
 TaskList.propTypes = {
-  tasks: propTypes.arrayOf(
-    propTypes.shape({
-      id: propTypes.number.isRequired,
-      title: propTypes.string.isRequired,
-      description: propTypes.string.isRequired,
-    })
-  ).isRequired,
+  tasks: propTypes.arrayOf(propTypes.shape({
+    id: propTypes.number.isRequired,
+    title: propTypes.string.isRequired,
+    description: propTypes.string.isRequired,
+  })).isRequired,
 };

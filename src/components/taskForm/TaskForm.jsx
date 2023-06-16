@@ -1,24 +1,40 @@
 import { useState } from "react";
 import propTypes from "prop-types";
 
-export default function TaskForm({createTask}) {
+export default function TaskForm({ createTask }) {
   const [tittle, setTittle] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(tittle);
-    createTask(tittle);
+    createTask({
+      title: tittle,
+      description: description,
+    });
+    setTittle("");
+    setDescription("");
   };
 
   return (
-    <form onSubmit={handleSubmit} onChange={(e) => setTittle(e.target.value)}>
-      <input type="text" placeholder="Write your task" />
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Write your task"
+        onChange={(e) => setTittle(e.target.value)}
+        value={tittle}
+        autoFocus
+      />
+      <textarea
+        placeholder="Write your description"
+        onChange={(e) => setDescription(e.target.value)}
+        value={description}
+      ></textarea>
       <button type="submit">Save</button>
     </form>
   );
 }
 
 TaskForm.propTypes = {
-    createTask: propTypes.func.isRequired,
-}
+  createTask: propTypes.func.isRequired,
+};
