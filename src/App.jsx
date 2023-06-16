@@ -12,17 +12,24 @@ export default function App() {
   }, []);
 
   const createTask = (task) => {
-    setTasks([...tasks, {
-      id: tasks.length + 1,
-      title: task.title,
-      description: task.description,
-    }]);
+    setTasks([
+      ...tasks,
+      {
+        id: tasks.length + 1,
+        title: task.title,
+        description: task.description,
+      },
+    ]);
+  };
+
+  const deleteTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
   };
 
   return (
     <>
-      <TaskForm createTask={createTask}/>
-      <TaskList tasks={tasks} />
+      <TaskForm createTask={createTask} />
+      <TaskList tasks={tasks} deleteTask={deleteTask}/>
     </>
   );
 }

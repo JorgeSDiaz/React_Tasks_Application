@@ -1,7 +1,7 @@
 import propTypes from "prop-types";
 import TaskCard from "../taskCard/TaskCard";
 
-export default function TaskList({ tasks }) {
+export default function TaskList({ tasks, deleteTask }) {
   if (tasks.length === 0) {
     return <h1>no tasks yet</h1>;
   }
@@ -9,7 +9,7 @@ export default function TaskList({ tasks }) {
   return (
     <>
       {tasks.map((task) => (
-        <TaskCard key={task.id} task={task} />
+        <TaskCard key={task.id} task={task} deleteTask={deleteTask} />
       ))}
     </>
   );
@@ -21,4 +21,5 @@ TaskList.propTypes = {
     title: propTypes.string.isRequired,
     description: propTypes.string.isRequired,
   })).isRequired,
+  deleteTask: propTypes.func.isRequired,
 };
