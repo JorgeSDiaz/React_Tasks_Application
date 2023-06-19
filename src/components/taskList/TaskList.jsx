@@ -4,7 +4,7 @@ import TaskCard from "../taskCard/TaskCard";
 import { TaskContext } from "../../context/TaskContext";
 
 export default function TaskList() {
-  const { tasks, deleteTask } = useContext(TaskContext);
+  const { tasks } = useContext(TaskContext);
 
   if (tasks.length === 0) {
     return <h1>no tasks yet</h1>;
@@ -13,7 +13,7 @@ export default function TaskList() {
   return (
     <>
       {tasks.map((task) => (
-        <TaskCard key={task.id} task={task} deleteTask={deleteTask} />
+        <TaskCard key={task.id} task={task} />
       ))}
     </>
   );
