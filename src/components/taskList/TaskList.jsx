@@ -1,7 +1,11 @@
-import propTypes from "prop-types";
-import TaskCard from "../taskCard/TaskCard";
+import { useContext } from "react";
 
-export default function TaskList({ tasks, deleteTask }) {
+import TaskCard from "../taskCard/TaskCard";
+import { TaskContext } from "../../context/TaskContext";
+
+export default function TaskList() {
+  const { tasks, deleteTask } = useContext(TaskContext);
+
   if (tasks.length === 0) {
     return <h1>no tasks yet</h1>;
   }
@@ -14,12 +18,3 @@ export default function TaskList({ tasks, deleteTask }) {
     </>
   );
 }
-
-TaskList.propTypes = {
-  tasks: propTypes.arrayOf(propTypes.shape({
-    id: propTypes.number.isRequired,
-    title: propTypes.string.isRequired,
-    description: propTypes.string.isRequired,
-  })).isRequired,
-  deleteTask: propTypes.func.isRequired,
-};

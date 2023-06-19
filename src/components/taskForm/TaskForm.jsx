@@ -1,7 +1,10 @@
-import { useState } from "react";
-import propTypes from "prop-types";
+import { useState, useContext } from "react";
 
-export default function TaskForm({ createTask }) {
+import { TaskContext } from "../../context/TaskContext";
+
+export default function TaskForm() {
+  const { createTask } = useContext(TaskContext);
+
   const [tittle, setTittle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -34,7 +37,3 @@ export default function TaskForm({ createTask }) {
     </form>
   );
 }
-
-TaskForm.propTypes = {
-  createTask: propTypes.func.isRequired,
-};
