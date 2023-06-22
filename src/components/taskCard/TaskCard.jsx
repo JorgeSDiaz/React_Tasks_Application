@@ -3,10 +3,12 @@ import { useContext } from "react";
 import { useState } from "react";
 
 import { TaskContext } from "../../context/TaskContext";
+import CardBody from "./cardBody/CardBody";
+import CardEditing from "./cardEditing/CardEditing";
 
 export default function TaskCard({ task }) {
   const { deleteTask } = useContext(TaskContext);
-  const [editing, setEditing] = useState(false)
+  const [editing, setEditing] = useState(false);
 
   const handleDeleteClick = () => {
     deleteTask(task.id);
@@ -19,8 +21,14 @@ export default function TaskCard({ task }) {
 
   return (
     <div className="bg-gray-700 text-white p-5 rounded-md">
-      <h1 className="text-2xl font-bold capitalize">{task.title}</h1>
-      <p className="text-sm text-yellow-500">{task.description}</p>
+      {!editing ? (
+        <CardBody task={task} />
+      ) : (
+        <>
+          <h1 className="text-2xl font-bold capitalize mb-3">editing</h1>
+          <CardEditing task={task} />
+        </>
+      )}
       <button
         className="bg-red-500 px-5 py-2 rounded-md mt-5 hover:bg-red-400"
         type="button"
